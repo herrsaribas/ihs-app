@@ -57,7 +57,7 @@ export function SubpageHeader({
     <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '14px clamp(20px,4vw,64px)', background: '#0d1420' }}>
       <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={LOGO} alt="IHS — Institute for Hadith Sciences" style={{ height: 'clamp(84px,7vw,110px)', width: 'auto', margin: '-14px 0', filter: 'brightness(0) invert(1)' }} />
+        <img src={LOGO} alt="IHS — Institute for Hadith Sciences" className="ihs-logo" style={{ height: 'clamp(84px,7vw,110px)', width: 'auto', margin: '-14px 0', filter: 'brightness(0) invert(1)' }} />
       </Link>
       <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
         {extraLinks}

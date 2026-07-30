@@ -53,13 +53,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div style={{ fontFamily: "'Inter',sans-serif", minHeight: '100svh', display: 'flex', background: '#f7f4ec', color: '#131c2b' }}>
-      <aside style={{ width: 232, flexShrink: 0, background: '#0d1420', color: '#fff', display: 'flex', flexDirection: 'column', padding: '24px 16px', gap: 24, position: 'sticky', top: 0, height: '100svh', boxSizing: 'border-box' }}>
+    <div className="ihs-admin" style={{ fontFamily: "'Inter',sans-serif", minHeight: '100svh', display: 'flex', background: '#f7f4ec', color: '#131c2b' }}>
+      <aside className="ihs-admin-side" style={{ width: 232, flexShrink: 0, background: '#0d1420', color: '#fff', display: 'flex', flexDirection: 'column', padding: '24px 16px', gap: 24, position: 'sticky', top: 0, height: '100svh', boxSizing: 'border-box' }}>
         <Link href="/" style={{ display: 'flex', justifyContent: 'center' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={LOGO} alt="IHS" style={{ width: 150, height: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.95 }} />
         </Link>
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <nav className="ihs-admin-nav" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {NAV.map((n) => {
             const active = pathname === n.href;
             return (
@@ -69,7 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             );
           })}
         </nav>
-        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div className="ihs-admin-user" style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <span style={{ fontSize: 11.5, color: 'rgba(255,255,255,.4)', wordBreak: 'break-all' }}>{session.user.email}</span>
           <button
             onClick={async () => { await getSupabase()?.auth.signOut(); router.replace('/admin/login'); }}

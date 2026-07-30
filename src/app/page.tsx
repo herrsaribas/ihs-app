@@ -20,6 +20,7 @@ export default function HomePage() {
   const [dailyLang, setDailyLang] = useState<DailyLang>('tr');
   const [eduOpen, setEduOpen] = useState(false);
   const [instOpen, setInstOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [kadroTab, setKadroTab] = useState(0);
   const [openQA, setOpenQA] = useState(0);
 
@@ -108,9 +109,17 @@ export default function HomePage() {
       <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: scrolled ? '10px clamp(20px,4vw,64px)' : '18px clamp(20px,4vw,64px)', transition: 'background .4s ease,box-shadow .4s ease,padding .4s ease', background: scrolled ? 'rgba(247,244,236,0.92)' : 'transparent', boxShadow: scrolled ? '0 1px 0 rgba(19,28,43,.08)' : 'none', backdropFilter: 'blur(8px)' }}>
         <a href="#hero" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={LOGO} alt="IHS — Institute for Hadith Sciences" style={{ height: 'clamp(84px,7vw,112px)', width: 'auto', margin: '-16px 0', filter: scrolled ? 'none' : 'brightness(0) invert(1)', transition: 'filter .4s ease' }} />
+          <img src={LOGO} alt="IHS — Institute for Hadith Sciences" className="ihs-logo" style={{ height: 'clamp(84px,7vw,112px)', width: 'auto', margin: '-16px 0', filter: scrolled ? 'none' : 'brightness(0) invert(1)', transition: 'filter .4s ease' }} />
         </a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px,1.6vw,22px)', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+        <button
+          className="ihs-nav-burger"
+          aria-label="Menü"
+          onClick={() => setMobileOpen(true)}
+          style={{ fontFamily: 'Inter', fontSize: 22, lineHeight: 1, background: 'none', border: `1px solid ${headerText}`, color: headerText, borderRadius: 10, padding: '8px 12px', cursor: 'pointer' }}
+        >
+          ☰
+        </button>
+        <nav className="ihs-nav-desktop">
           <div style={{ position: 'relative' }}>
             <button onClick={() => { setEduOpen(!eduOpen); setInstOpen(false); }} style={{ fontFamily: 'Inter', fontSize: 13, fontWeight: 500, background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: headerText, opacity: 0.85, display: 'flex', alignItems: 'center', gap: 5 }}>
               {t.nav.edu} <span style={{ fontSize: 8 }}>▼</span>
@@ -149,6 +158,39 @@ export default function HomePage() {
           <Link href="/basvuru" style={{ fontSize: 13, fontWeight: 600, textDecoration: 'none', color: '#fff', background: '#1c7a5c', borderRadius: 24, padding: '9px 20px', whiteSpace: 'nowrap' }}>{t.buttons.apply}</Link>
         </nav>
       </header>
+
+      {/* ---------- Mobile menu ---------- */}
+      {mobileOpen && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 400, background: 'linear-gradient(180deg,#0d1420,#131c2b)', color: '#fff', display: 'flex', flexDirection: 'column', padding: '20px 24px 40px', overflowY: 'auto', animation: 'ihsFadeIn .25s ease' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={LOGO} alt="IHS" style={{ height: 62, width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.95 }} />
+            <button aria-label="Kapat" onClick={() => setMobileOpen(false)} style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,.1)', color: '#fff', border: '1px solid rgba(255,255,255,.3)', fontSize: 16, cursor: 'pointer' }}>✕</button>
+          </div>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: 4 }} onClick={() => setMobileOpen(false)}>
+            <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#7fd1ae', padding: '10px 0 6px' }}>{t.nav.edu}</span>
+            <Link href="/program#hadis-merkezli" style={{ fontSize: 16.5, fontWeight: 600, textDecoration: 'none', color: '#fff', padding: '9px 0' }}>{t.nav.eduP1}</Link>
+            <Link href="/program#hadis-ilimleri" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.8)', padding: '7px 0' }}>{t.nav.eduP2}</Link>
+            <Link href="/program#tefsir-ilimleri" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.8)', padding: '7px 0' }}>{t.nav.eduP3}</Link>
+            <Link href="/program#meal-calismalari" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.8)', padding: '7px 0' }}>{t.nav.eduP4}</Link>
+            <Link href="/egitimler" style={{ fontSize: 14, fontWeight: 600, textDecoration: 'none', color: '#7fd1ae', padding: '7px 0' }}>{t.nav.eduAll} →</Link>
+            <span style={{ height: 1, background: 'rgba(255,255,255,.12)', margin: '14px 0' }} />
+            <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#7fd1ae', padding: '0 0 6px' }}>{t.nav.inst}</span>
+            <Link href="/enstitu#hakkimizda" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.85)', padding: '7px 0' }}>{t.nav.instAbout}</Link>
+            <Link href="/kadro" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.85)', padding: '7px 0' }}>{t.nav.kadro}</Link>
+            <Link href="/enstitu#projeler" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.85)', padding: '7px 0' }}>{t.nav.projeler}</Link>
+            <Link href="/enstitu#faaliyetler" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.85)', padding: '7px 0' }}>{t.nav.faaliyetler}</Link>
+            <span style={{ height: 1, background: 'rgba(255,255,255,.12)', margin: '14px 0' }} />
+            <Link href="/sorularla-hadis" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.85)', padding: '7px 0' }}>{t.nav.hadis}</Link>
+            <a href="#yayinlar" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.85)', padding: '7px 0' }}>{t.nav.yayinlar}</a>
+            <a href="#contact" style={{ fontSize: 15, textDecoration: 'none', color: 'rgba(255,255,255,.85)', padding: '7px 0' }}>{t.nav.contact}</a>
+          </nav>
+          <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginTop: 28, flexWrap: 'wrap' }}>
+            <Link href="/basvuru" onClick={() => setMobileOpen(false)} style={{ fontSize: 14.5, fontWeight: 600, textDecoration: 'none', color: '#fff', background: '#1c7a5c', borderRadius: 26, padding: '13px 30px' }}>{t.buttons.apply}</Link>
+            <button onClick={toggleLang} style={{ fontFamily: 'Inter', fontSize: 13.5, fontWeight: 600, letterSpacing: '.04em', background: 'none', border: '1px solid rgba(255,255,255,.5)', color: '#fff', borderRadius: 22, padding: '10px 18px', cursor: 'pointer' }}>{otherLangLabel}</button>
+          </div>
+        </div>
+      )}
 
       {/* ---------- Hero (video background) ---------- */}
       <section id="hero" style={{ position: 'relative', minHeight: '100svh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', background: 'linear-gradient(180deg,#0d1420 0%,#131c2b 60%,#0d1420 100%)', overflow: 'hidden', padding: '140px 24px 100px' }}>

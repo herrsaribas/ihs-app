@@ -73,7 +73,7 @@ export default function BasvuruPage() {
                 {t.stepLabels.map((label, i) => (
                   <div key={label} style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 10, padding: '18px 16px', color: i === step ? '#131c2b' : 'rgba(19,28,43,.45)', borderBottom: i === step ? '2px solid #1c7a5c' : '2px solid transparent', background: i < step ? 'rgba(28,122,92,.05)' : 'none' }}>
                     <span style={{ width: 22, height: 22, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 700, flexShrink: 0, background: i <= step ? '#1c7a5c' : 'rgba(19,28,43,.12)', color: i <= step ? '#fff' : 'rgba(19,28,43,.5)' }}>{i + 1}</span>
-                    <span style={{ fontSize: 12.5, fontWeight: 600, letterSpacing: '.02em' }}>{label}</span>
+                    <span className="ihs-step-label" style={{ fontSize: 12.5, fontWeight: 600, letterSpacing: '.02em' }}>{label}</span>
                   </div>
                 ))}
               </div>

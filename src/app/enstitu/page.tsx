@@ -34,7 +34,7 @@ export default function EnstituPage() {
       <SubpageHero eyebrow={ui.eyebrow} title={cur.title} sub={cur.sub} />
 
       <div style={{ background: '#fff', borderBottom: '1px solid rgba(19,28,43,.1)' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 4, justifyContent: 'center' }}>
+        <div className="ihs-tabs" style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 4, justifyContent: 'center' }}>
           {t.tabs.map((x) => (
             <button
               key={x.id}

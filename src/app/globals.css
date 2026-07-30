@@ -27,3 +27,60 @@ a { color: inherit; }
 input:focus, select:focus, textarea:focus {
   outline: 2px solid rgba(28, 122, 92, 0.5);
 }
+
+/* ---------- responsive helpers (inline styles can't hold media queries) ---------- */
+
+/* Home page desktop nav vs. hamburger */
+.ihs-nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.6vw, 22px);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.ihs-nav-burger { display: none; }
+
+@media (max-width: 940px) {
+  .ihs-nav-desktop { display: none; }
+  .ihs-nav-burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ihs-logo { height: 74px !important; margin: -10px 0 !important; }
+}
+
+@media (max-width: 560px) {
+  .ihs-logo { height: 62px !important; }
+  /* Başvuru: keep the step circles, hide the text labels on tiny screens */
+  .ihs-step-label { display: none; }
+}
+
+/* Tab bars scroll horizontally instead of overflowing */
+.ihs-tabs {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ihs-tabs::-webkit-scrollbar { display: none; }
+@media (max-width: 700px) {
+  /* centered tab bars would clip their first tab when overflowing */
+  .ihs-tabs { justify-content: flex-start !important; }
+}
+
+/* Admin: sidebar becomes a top bar on small screens */
+@media (max-width: 860px) {
+  .ihs-admin { flex-direction: column; }
+  .ihs-admin-side {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 14px 16px !important;
+    gap: 14px !important;
+  }
+  .ihs-admin-nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+  }
+  .ihs-admin-user { margin-top: 0 !important; flex-direction: row !important; align-items: center; }
+}

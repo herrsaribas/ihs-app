@@ -22,7 +22,7 @@ export default function KadroPage() {
       <SubpageHero eyebrow={ui.eyebrow} title={ui.title} sub={ui.sub} />
 
       <div style={{ background: '#fff', borderBottom: '1px solid rgba(19,28,43,.1)' }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 4, justifyContent: 'center' }}>
+        <div className="ihs-tabs" style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 4, justifyContent: 'center' }}>
           {groups.map((g, i) => (
             <button key={g.name} onClick={() => { setTab(i); setSelected(null); }} style={{ fontFamily: 'Inter', fontSize: 13.5, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap', background: 'none', border: 'none', padding: '17px 20px', transition: 'color .2s ease', color: i === tab ? '#1c7a5c' : 'rgba(19,28,43,.55)', boxShadow: i === tab ? 'inset 0 -2px 0 #1c7a5c' : 'none' }}>
               {g.name}

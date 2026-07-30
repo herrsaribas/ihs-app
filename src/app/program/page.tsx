@@ -51,7 +51,7 @@ export default function ProgramPage() {
       </section>
 
       <div style={{ background: '#fff', borderBottom: '1px solid rgba(19,28,43,.1)' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 4, overflowX: 'auto' }}>
+        <div className="ihs-tabs" style={{ maxWidth: 1080, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 4, overflowX: 'auto' }}>
           {PROGRAMS.map((pr) => (
             <button
               key={pr.id}
