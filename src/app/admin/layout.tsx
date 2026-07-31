@@ -20,7 +20,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const { session, loading, configured } = useAdminSession();
-  const isLogin = pathname === '/admin/login';
+  // trailingSlash: true makes routes render as /admin/login/ — normalize before comparing
+  const path = (pathname || '/').replace(/\/+$/, '') || '/';
+  const isLogin = path === '/admin/login';
 
   useEffect(() => {
     if (!loading && configured && !session && !isLogin) router.replace('/admin/login');
@@ -61,7 +63,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </Link>
         <nav className="ihs-admin-nav" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {NAV.map((n) => {
-            const active = pathname === n.href;
+            const active = path === n.href;
             return (
               <Link key={n.href} href={n.href} style={{ fontSize: 13.5, fontWeight: active ? 700 : 500, textDecoration: 'none', color: active ? '#fff' : 'rgba(255,255,255,.65)', background: active ? 'rgba(28,122,92,.35)' : 'none', borderRadius: 8, padding: '10px 14px' }}>
                 {n.label}
