@@ -37,15 +37,14 @@ export default function BasvuruPage() {
     if (!form.name.trim() || !form.email.trim()) { setError(t.required); return; }
     setSubmitting(true);
     const sb = getSupabase();
-    if (sb) {
-      const { error: err } = await sb.from('applications').insert({
-        program: programs[program].name,
-        name: form.name, email: form.email, phone: form.phone || null,
-        city: form.city || null, education: form.education || null,
-        motivation: form.motivation || null, lang,
-      });
-      if (err) { setError(t.error); setSubmitting(false); return; }
-    }
+    if (!sb) { setError(t.error); setSubmitting(false); return; }
+    const { error: err } = await sb.from('applications').insert({
+      program: programs[program].name,
+      name: form.name, email: form.email, phone: form.phone || null,
+      city: form.city || null, education: form.education || null,
+      motivation: form.motivation || null, lang,
+    });
+    if (err) { setError(t.error); setSubmitting(false); return; }
     setSubmitting(false);
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });

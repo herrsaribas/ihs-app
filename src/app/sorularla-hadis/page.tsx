@@ -40,12 +40,11 @@ export default function SorularlaHadisPage() {
   async function submitAsk(e: FormEvent) {
     e.preventDefault();
     const sb = getSupabase();
-    if (sb && askForm.question.trim()) {
-      await sb.from('submitted_questions').insert({
-        name: askForm.name || null, email: askForm.email || null, question: askForm.question, lang,
-      });
-    }
-    setAsked(true);
+    if (!sb || !askForm.question.trim()) return;
+    const { error } = await sb.from('submitted_questions').insert({
+      name: askForm.name || null, email: askForm.email || null, question: askForm.question, lang,
+    });
+    if (!error) setAsked(true);
   }
 
   return (

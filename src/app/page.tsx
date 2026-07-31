@@ -62,10 +62,9 @@ export default function HomePage() {
   async function submitContact(e: FormEvent) {
     e.preventDefault();
     const sb = getSupabase();
-    if (sb && cName && cEmail && cMsg) {
-      await sb.from('contact_messages').insert({ name: cName, email: cEmail, message: cMsg, lang });
-    }
-    setCSent(true);
+    if (!sb) return;
+    const { error } = await sb.from('contact_messages').insert({ name: cName, email: cEmail, message: cMsg, lang });
+    if (!error) setCSent(true);
   }
 
   return (
